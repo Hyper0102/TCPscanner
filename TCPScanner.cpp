@@ -1,7 +1,3 @@
-// TCPScanner.cpp : Defines the entry point for the console application.
-
-
-
 #define WIN32_LEAN_AND_MEAN
 
 #include <stdio.h>
@@ -26,7 +22,7 @@ typedef struct
    bool result;
 } TASK_PARAM;
 
-const int NTASK=500;
+const int NTASK=64;
 TASK_PARAM Param[NTASK];
 
 
@@ -112,7 +108,7 @@ int ip[4];
    for(int i=1; i<65536; i++)
    {  int ntask;
       bool res;
-      res=TaskPool.WaitForAnyReady(&ntask);
+      res=TaskPool.WaitForAnyReady(&ntask,INFINITE);
       if (!res)
       {  printf("error\n");
          return 0;
@@ -122,7 +118,7 @@ int ip[4];
       TaskPool.Start(&Param[ntask]); 
    }
    //
-   TaskPool.WaitForAllComplete();
+    TaskPool.WaitForAllComplete(INFINITE);
 
    for(int i=1; i<65536; i++)
    {   if(ResultTab[i])
