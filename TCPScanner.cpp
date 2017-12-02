@@ -115,7 +115,7 @@ int ip[4];
       }
       Param[ntask].ip=addr;
       Param[ntask].port=i;
-      TaskPool.Start(&Param[ntask]); 
+      TaskPool.Start(ntask, &Param[ntask]);
    }
    //
     TaskPool.WaitForAllComplete(INFINITE);
